@@ -1,1 +1,3 @@
-web: gunicorn notes_app.wsgi
+web: gunicorn notes_app.wsgi:application --log-file - --log-level debug
+heroku ps:scale web=1
+python manage.py migrate
