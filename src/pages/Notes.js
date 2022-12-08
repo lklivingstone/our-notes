@@ -14,7 +14,7 @@ const Notes = () => {
     useEffect( () => {
         const getNotes= async () => {
             try {
-                let res= await fetch(`https://django-react-note-app.herokuapp.com/api/notes/`)
+                let res= await fetch(`https://web-production-0169.up.railway.app/api/notes/`)
                 res= await res.json()
                 // console.log(res)
                 setNotes(res)

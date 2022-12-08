@@ -24,7 +24,7 @@ const Note = () => {
         }
         const getNote= async () => {
             try{
-                let res= await fetch(`https://django-react-note-app.herokuapp.com/api/notes/${noteId}/`)
+                let res= await fetch(`https://web-production-0169.up.railway.app/api/notes/${noteId}/`)
                 // console.log(res)
                 res= await res.json()
                 setNote(res)
@@ -39,7 +39,7 @@ const Note = () => {
 
     let updateNote= async () => {
         try{
-            await fetch(`https://django-react-note-app.herokuapp.com/api/notes/${noteId}/`, {
+            await fetch(`https://web-production-0169.up.railway.app/api/notes/${noteId}/`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
@@ -54,19 +54,23 @@ const Note = () => {
     }
 
     let handleSubmit = () => {
-        if (noteId!=="new" && note.body.length===0) {
+        // console.log(note)
+        if (noteId!=="new" && note!==null && note.body.length===0) {
             handleDelete()
         }
         else if (noteId!=="new" ) {
             updateNote()
         }
-        else if (noteId==="new" && note.body.length!==0) {
+        else if (noteId==="new" && note!==null) {
             handleAdd()
+        }
+        else {
+            navigate(-1)
         }
     }
 
     let handleDelete = async () => {
-        await fetch(`https://django-react-note-app.herokuapp.com/api/notes/${noteId}/`, {
+        await fetch(`https://web-production-0169.up.railway.app/api/notes/${noteId}/`, {
             method: "DELETE",
             header: {
                 "Content-type": "application/json"
@@ -77,7 +81,7 @@ const Note = () => {
 
     let handleAdd = async() => {
         try {
-            await fetch(`https://django-react-note-app.herokuapp.com/api/notes/`, {
+            await fetch(`https://web-production-0169.up.railway.app/api/notes/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
