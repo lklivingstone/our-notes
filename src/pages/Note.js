@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import Header from "../components/Header";
 import '../App.css';
 import { useNavigate } from "react-router-dom";
+import Spin from "../animation/Spin"
 
 
 
@@ -17,6 +18,7 @@ const Note = () => {
     // console.log(noteId)
 
     const [note, setNote]= useState(null)
+    const [ loading, setLoading ]= useState(true)
 
     useEffect( ()=> {
         if (noteId==="new") {
@@ -24,10 +26,11 @@ const Note = () => {
         }
         const getNote= async () => {
             try{
-                let res= await fetch(`https://web-production-0169.up.railway.app/api/notes/${noteId}/`)
+                let res= await fetch(`https://django-note.onrender.com/api/notes/${noteId}/`)
                 // console.log(res)
                 res= await res.json()
                 setNote(res)
+                setLoading(false)
                 // console.log(res)
             }
             catch(err) {
@@ -39,7 +42,7 @@ const Note = () => {
 
     let updateNote= async () => {
         try{
-            await fetch(`https://web-production-0169.up.railway.app/api/notes/${noteId}/`, {
+            await fetch(`https://django-note.onrender.com/api/notes/${noteId}/`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
@@ -70,7 +73,7 @@ const Note = () => {
     }
 
     let handleDelete = async () => {
-        await fetch(`https://web-production-0169.up.railway.app/api/notes/${noteId}/`, {
+        await fetch(`https://django-note.onrender.com/api/notes/${noteId}/`, {
             method: "DELETE",
             header: {
                 "Content-type": "application/json"
@@ -81,7 +84,7 @@ const Note = () => {
 
     let handleAdd = async() => {
         try {
-            await fetch(`https://web-production-0169.up.railway.app/api/notes/`, {
+            await fetch(`https://django-note.onrender.com/api/notes/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -113,6 +116,9 @@ const Note = () => {
                     )
                     }  
                 </div>
+                {loading && <div style={{display: "flex", alignItems: "center", justifyContent: "center", height: "100%", width: "100%"}}>
+                    <Spin />
+                </div>}
                 <textarea onChange={(e)=> {
                     setNote({...note, "body": e.target.value})
                 }} value={note?.body}></textarea>

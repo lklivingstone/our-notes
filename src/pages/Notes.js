@@ -5,19 +5,25 @@ import Header from "../components/Header";
 import FilterListOutlinedIcon from '@mui/icons-material/FilterListOutlined';
 import AddIcon from '@mui/icons-material/Add';
 import { useLocation } from "react-router-dom";
+import Spin from "../animation/Spin"
+
+
+
 const Notes = () => {
     const location= useLocation();
     // const noteId= location.pathname.split("/")[2];
     const address= location.pathname.split("/")[0];
     let [notes, setNotes]= useState([])
+    const [ loading, setLoading ]= useState(true)
 
     useEffect( () => {
         const getNotes= async () => {
             try {
-                let res= await fetch(`https://web-production-0169.up.railway.app/api/notes/`)
+                let res= await fetch(`https://django-note.onrender.com/api/notes/`)
                 res= await res.json()
                 // console.log(res)
                 setNotes(res)
+                setLoading(false)
             } catch(err) {
 
             }
@@ -68,6 +74,9 @@ const Notes = () => {
                 <p className="notes-count">{notes.length}</p>
             </div>
             <div className="note-list">
+                {loading && <div style={{display: "flex", alignItems: "center", justifyContent: "center", height: "100%", width: "100%"}}>
+                    <Spin />
+                </div>}
                 {notes.map((note, index)=> (
                     // {console.log(note.id)}
                     <div key={note.id}>
