@@ -116,7 +116,7 @@ const Note = () => {
                     )
                     }  
                 </div>
-                {loading && <div style={{display: "flex", alignItems: "center", justifyContent: "center", height: "100%", width: "100%"}}>
+                {noteId!=="new" && loading && <div style={{display: "flex", alignItems: "center", justifyContent: "center", height: "100%", width: "100%"}}>
                     <Spin />
                 </div>}
                 <textarea onChange={(e)=> {
