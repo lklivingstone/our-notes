@@ -141,10 +141,10 @@ DATABASES = {
     'default': {
         'CONN_MAX_AGE': 0,
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'django_note_gobx',
-        'USER': 'django_note_gobx_user',
-        'PASSWORD': 'iXarUQxZre6dp8to4uipw8bBWNjQxjQh',
-        'HOST':'dpg-cgneph2ut4m1g7jp2v30-a.singapore-postgres.render.com',
+        'NAME': 'db_xkrv',
+        'USER': 'lk',
+        'PASSWORD': 'tX57eIbJoyTJLEGHvDVosAfm5ySlAEGf',
+        'HOST':'dpg-ck9c87mgtj9c73bui02g-a.singapore-postgres.render.com',
         'PORT': '5432'
     }
 }
